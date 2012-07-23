@@ -16,8 +16,12 @@ function! cuiaboutme#Show(user)
     exec 'silent noautocmd split '.name
   endif
   setlocal buftype=acwrite bufhidden=delete noswapfile
+  let old_undolevels = &undolevels
+  set undolevels=-1
   silent %d _
   call setline(1, split(res.content, "\n"))
+  let &undolevels = old_undolevels
+  setlocal nomodified
   1
   exe "au! BufWriteCmd <buffer> call cuiaboutme#Update('".a:user."')"
 endfunction
