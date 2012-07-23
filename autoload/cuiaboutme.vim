@@ -19,7 +19,7 @@ function! cuiaboutme#Show(user)
   let old_undolevels = &undolevels
   set undolevels=-1
   silent %d _
-  call setline(1, split(res.content, "\n"))
+  call setline(1, split(iconv(res.content, 'utf-8', &encoding), "\n"))
   let &undolevels = old_undolevels
   setlocal nomodified
   1
